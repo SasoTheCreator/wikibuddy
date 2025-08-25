@@ -64,7 +64,7 @@ export const Header = ({ onOpenHistory, onNewConversation }: HeaderProps) => {
   };
 
   return (
-    <header className="border-b bg-background/95 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b backdrop-blur-sm sticky top-0 z-50">
       <div className="px-6 py-2 flex items-center justify-between">
         <Link
           to="/"

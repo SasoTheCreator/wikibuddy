@@ -12,16 +12,19 @@ const Index = () => {
   };
 
   const handleNewConversation = () => {
-    setKey(prev => prev + 1); // Force re-render
+    setKey((prev) => prev + 1); // Force re-render
   };
 
   return (
-    <div className="h-screen bg-background flex flex-col">
-      <Header onOpenHistory={handleOpenHistory} onNewConversation={handleNewConversation} />
-      <main className="flex-1 flex flex-col">
-        <SearchSection 
+    <div className="h-screen flex flex-col">
+      <Header
+        onOpenHistory={handleOpenHistory}
+        onNewConversation={handleNewConversation}
+      />
+      <main className="flex-1 flex flex-col bg-background">
+        <SearchSection
           key={key}
-          isHistoryOpen={isHistoryOpen} 
+          isHistoryOpen={isHistoryOpen}
           setIsHistoryOpen={setIsHistoryOpen}
         />
       </main>
