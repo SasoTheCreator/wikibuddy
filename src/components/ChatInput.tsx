@@ -8,8 +8,6 @@ interface ChatInputProps {
   onSendMessage: () => void;
   isLoading: boolean;
   hasArticle: boolean;
-  isPreview?: boolean;
-  onFirstQuestion?: () => void;
   hasUnsavedMessages?: boolean;
   unsavedMessageCount?: number;
 }
@@ -20,8 +18,6 @@ export const ChatInput = ({
   onSendMessage,
   isLoading,
   hasArticle,
-  isPreview = false,
-  onFirstQuestion,
   hasUnsavedMessages = false,
   unsavedMessageCount = 0,
 }: ChatInputProps) => {
@@ -30,18 +26,6 @@ export const ChatInput = ({
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      if (isPreview && onFirstQuestion) {
-        onFirstQuestion();
-      } else {
-        onSendMessage();
-      }
-    }
-  };
-
-  const handleSendClick = () => {
-    if (isPreview && onFirstQuestion) {
-      onFirstQuestion();
-    } else {
       onSendMessage();
     }
   };
@@ -61,36 +45,6 @@ export const ChatInput = ({
   const placeholder = hasArticle
     ? "Ask a question about the Wikipedia article..."
     : "Load a Wikipedia article first to start asking questions";
-
-  if (isPreview) {
-    return (
-      <div className="border-t p-4">
-        <div className="flex space-x-2">
-          <div className="flex-1 relative">
-            <textarea
-              value={inputValue}
-              onChange={(e) => onInputChange(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={placeholder}
-              className="w-full resize-none rounded-lg border border-input bg-background px-3 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[80px] max-h-[150px]"
-              rows={4}
-            />
-            <div className="absolute bottom-2 right-2 text-xs text-muted-foreground">
-              Press Enter to send, Shift+Enter for new line
-            </div>
-          </div>
-          <Button
-            onClick={handleSendClick}
-            disabled={!inputValue.trim()}
-            size="lg"
-            className="h-[80px] px-4"
-          >
-            <Send className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="border-t p-4">

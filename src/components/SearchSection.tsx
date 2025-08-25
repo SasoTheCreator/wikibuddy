@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { aiService } from "@/lib/ai";
 import { LocalStorageService, ArticleConversation } from "@/lib/storage";
@@ -117,7 +117,7 @@ export const SearchSection = ({
     }
   }, [currentArticle]);
 
-  const handleNewConversation = () => {
+  const handleNewConversation = useCallback(() => {
     // Clear current state
     setMessages([]);
     setInputValue("");
@@ -129,24 +129,27 @@ export const SearchSection = ({
 
     // Clear AI context
     aiService.clearArticleContext();
-  };
+  }, []);
 
-  const handleArticleLoaded = (article: { title: string; url: string }) => {
-    setCurrentArticle(article);
-    // Clear previous messages when loading new article
-    setMessages([]);
-    setIsConversationSaved(false);
-    setHasUnsavedMessages(false);
-    setUnsavedMessageCount(0);
-  };
+  const handleArticleLoaded = useCallback(
+    (article: { title: string; url: string }) => {
+      setCurrentArticle(article);
+      // Clear previous messages when loading new article
+      setMessages([]);
+      setIsConversationSaved(false);
+      setHasUnsavedMessages(false);
+      setUnsavedMessageCount(0);
+    },
+    []
+  );
 
-  const handleSearchStart = () => {
+  const handleSearchStart = useCallback(() => {
     // This will be called when search starts to clear any existing state
     setMessages([]);
     setIsConversationSaved(false);
     setHasUnsavedMessages(false);
     setUnsavedMessageCount(0);
-  };
+  }, []);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isChatLoading) return;

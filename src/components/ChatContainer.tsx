@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
-import { ChatInputPreview } from "./ChatInputPreview";
 
 interface Message {
   id: string;
@@ -58,9 +57,9 @@ export const ChatContainer = ({
     onSendMessage();
   };
 
-  // Si pas d'article, afficher le preview
+  // Si pas d'article, ne rien afficher
   if (!currentArticle) {
-    return <ChatInputPreview onFirstQuestion={() => {}} />;
+    return null;
   }
 
   // Si article chargé mais pas encore de conversation, afficher juste l'input
@@ -105,7 +104,6 @@ export const ChatContainer = ({
           onSendMessage={handleFirstQuestion}
           isLoading={isLoading}
           hasArticle={true}
-          isPreview={false}
           hasUnsavedMessages={hasUnsavedMessages}
           unsavedMessageCount={unsavedMessageCount}
         />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, ArrowRight, X, AlertCircle, CheckCircle } from "lucide-react";
@@ -35,7 +35,7 @@ export const SearchInterface = ({
     }
   }, [searchUrl]);
 
-  const validateUrl = (url: string) => {
+  const validateUrl = useCallback((url: string) => {
     if (!url.trim()) {
       setUrlError(null);
       return;
@@ -62,7 +62,7 @@ export const SearchInterface = ({
     }
 
     setUrlError(null);
-  };
+  }, []);
 
   const handleSearch = async () => {
     if (!searchUrl.trim()) {
@@ -143,24 +143,24 @@ export const SearchInterface = ({
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       handleSearch();
     }
-  };
+  }, []);
 
-  const handleClearInput = () => {
+  const handleClearInput = useCallback(() => {
     setSearchUrl("");
     setUrlError(null);
-  };
+  }, []);
 
-  const handleInputFocus = () => {
+  const handleInputFocus = useCallback(() => {
     setIsInputFocused(true);
-  };
+  }, []);
 
-  const handleInputBlur = () => {
+  const handleInputBlur = useCallback(() => {
     setIsInputFocused(false);
-  };
+  }, []);
 
   const isUrlValid = searchUrl.trim() && !urlError;
 
@@ -179,8 +179,8 @@ export const SearchInterface = ({
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
             Paste an English Wikipedia URL to start an interactive learning
-            session. Your buddy will help learn more about the subject and ou
-            will be able to save its naswers.
+            session. Your buddy will help learn more about the subject and you
+            will be able to save its answers.
           </p>
         </div>
       </div>

@@ -59,15 +59,7 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      backgroundImage: {
-        "gradient-hero": "var(--gradient-hero)",
-        "gradient-accent": "var(--gradient-accent)",
-      },
-      boxShadow: {
-        soft: "var(--shadow-soft)",
-        medium: "var(--shadow-medium)",
-        large: "var(--shadow-large)",
-      },
+
       keyframes: {
         "accordion-down": {
           from: {
@@ -92,8 +84,6 @@ export default {
       },
       fontFamily: {
         sans: ["Arial", "system-ui", "sans-serif"],
-        serif: ["Georgia", "serif"],
-        mono: ["JetBrains Mono", "monospace"],
       },
     },
   },
