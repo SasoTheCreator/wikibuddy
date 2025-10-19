@@ -121,7 +121,7 @@ ${context.content}`;
         message
       );
 
-    return hasUrl || hasChangeKeywords;
+    return Boolean(hasUrl) || hasChangeKeywords;
   }
 
   // New method to load article from URL

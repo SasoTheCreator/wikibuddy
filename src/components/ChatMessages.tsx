@@ -23,8 +23,7 @@ interface ChatMessagesProps {
   onCopyMessage: (messageId: string, content: string) => void;
   onSaveBotResponse: (
     messageId: string,
-    content: string,
-    userQuestion?: string
+    content: string
   ) => void;
   savedResponseIds: string[];
 }
@@ -113,12 +112,7 @@ export const ChatMessages = ({
   };
 
   const handleSaveBotResponse = (messageId: string, content: string) => {
-    // Find the user question that preceded this bot response
-    const messageIndex = messages.findIndex((msg) => msg.id === messageId);
-    const userQuestion =
-      messageIndex > 0 ? messages[messageIndex - 1].content : undefined;
-
-    onSaveBotResponse(messageId, content, userQuestion);
+    onSaveBotResponse(messageId, content);
   };
 
   return (
@@ -202,18 +196,9 @@ export const ChatMessages = ({
                         size="sm"
                         onClick={() => {
                           // Find the user question that corresponds to this assistant response
-                          const messageIndex = messages.findIndex(
-                            (m) => m.id === message.id
-                          );
-                          const userQuestion =
-                            messageIndex > 0 &&
-                            messages[messageIndex - 1].role === "user"
-                              ? messages[messageIndex - 1].content
-                              : undefined;
                           handleSaveBotResponse(
                             message.id,
-                            message.content,
-                            userQuestion
+                            message.content
                           );
                         }}
                         className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground"
