@@ -29,6 +29,48 @@ export const ConversationHistory = ({
   const [conversations, setConversations] = useState<ArticleConversation[]>([]);
   const { toast } = useToast();
 
+  const formatResponseContent = (content: string) => {
+    // Convert ### title to bold (h3)
+    let formatted = content.replace(
+      /^### (.*$)/gm,
+      "<h3 class='font-bold text-sm mb-1 mt-2'>$1</h3>"
+    );
+
+    // Convert ## title to bold (h2)
+    formatted = formatted.replace(
+      /^## (.*$)/gm,
+      "<h2 class='font-bold text-base mb-1 mt-2'>$1</h2>"
+    );
+
+    // Convert # title to bold (h1)
+    formatted = formatted.replace(
+      /^# (.*$)/gm,
+      "<h1 class='font-bold text-lg mb-2 mt-2'>$1</h1>"
+    );
+
+    // Convert ***text*** to bold
+    formatted = formatted.replace(/\*\*\*(.*?)\*\*\*/g, "<strong>$1</strong>");
+
+    // Convert **text** to bold
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+    // Convert *text* to italic
+    formatted = formatted.replace(/\*(.*?)\*/g, "<em>$1</em>");
+
+    // Convert line breaks to proper paragraphs
+    const paragraphs = formatted
+      .split("\n\n")
+      .map((paragraph, index) => {
+        if (paragraph.trim()) {
+          return `<p key="${index}" class="mb-1">${paragraph}</p>`;
+        }
+        return "";
+      })
+      .join("");
+
+    return paragraphs;
+  };
+
   useEffect(() => {
     if (isOpen) {
       loadConversations();
@@ -193,7 +235,12 @@ export const ConversationHistory = ({
 
                         {/* Bot Response */}
                         <div className="text-sm">
-                          <p className="line-clamp-3">{response.content}</p>
+                          <div
+                            className="line-clamp-3"
+                            dangerouslySetInnerHTML={{
+                              __html: formatResponseContent(response.content),
+                            }}
+                          />
                         </div>
                       </div>
                     ))}

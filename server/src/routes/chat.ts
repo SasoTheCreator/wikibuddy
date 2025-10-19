@@ -35,6 +35,11 @@ router.post("/message", async (req, res) => {
     res.json(response);
   } catch (error: any) {
     console.error("Chat API error:", error);
+    console.error("Error details:", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+    });
 
     // Handle specific Anthropic API errors
     if (error.message.includes("API key")) {

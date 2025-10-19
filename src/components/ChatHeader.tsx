@@ -18,7 +18,7 @@ export const ChatHeader = ({
   return (
     <div className="flex items-center justify-center p-4 border-b bg-muted/30">
       {currentArticle && (
-        <span className="text-sm text-muted-foregroun font-bold">
+        <span className="text-sm text-muted-foreground font-bold">
           {currentArticle.title}
         </span>
       )}

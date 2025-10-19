@@ -178,11 +178,12 @@ export const SearchInterface = ({
             Learn with Wikipedia
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Paste an English Wikipedia URL to start an interactive learning
-            session. Your buddy will help learn more about the subject and you
-            will be able to save its answers.
+            Paste an <span className="font-bold">English</span> Wikipedia URL to
+            start an interactive learning session. Your buddy will help learn
+            more about the subject and you will be able to save its answers.
           </p>
-        </div>
+        </div>{" "}
+        et lee
       </div>
 
       {/* Search Input Section */}
@@ -284,9 +285,8 @@ export const SearchInterface = ({
       {/* Info Section */}
       <div className="bg-muted/30 rounded-lg p-6 text-center">
         <p className="text-base text-muted-foreground">
-          💡 Your conversations are automatically saved locally and organized by
-          article. You can also paste Wikipedia URLs directly in the chat to
-          switch articles!
+          💡 Your conversations are saved locally and organized by article. You
+          can also paste Wikipedia URLs directly in the chat to switch articles!
         </p>
       </div>
     </div>

@@ -33,6 +33,15 @@ export class AIService {
     // Use environment variable or default to localhost
     this.backendUrl =
       import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
+
+    // Production host override: if running on the Lovable domain, force Railway backend URL
+    // This avoids needing to configure VITE_BACKEND_URL in the frontend hosting platform
+    if (typeof window !== "undefined") {
+      const host = window.location.host;
+      if (host === "wikibuddy.lovable.app") {
+        this.backendUrl = "https://wikibuddy-production.up.railway.app";
+      }
+    }
   }
 
   public static getInstance(): AIService {

@@ -1,73 +1,110 @@
-# Welcome to your Lovable project
+# WikiBuddy
 
-## Project info
+WikiBuddy is an intelligent learning assistant that transforms how you explore and understand Wikipedia articles. Using advanced AI technology, it helps you dive deeper into any topic with personalized explanations, interactive conversations, and comprehensive summaries.
 
-**URL**: https://lovable.dev/projects/c7f1d055-86c1-46e4-aac9-1d69d8838793
+## Features
 
-## How can I edit this code?
+- **Interactive Learning**: Ask questions about any Wikipedia article and get AI-powered responses
+- **Smart Note-Taking**: Save important responses for future reference
+- **Conversation History**: Keep track of your learning sessions organized by article
+- **Local Storage**: All your data is stored locally in your browser - no account required
+- **Real-time Analysis**: Get instant insights and explanations about complex topics
 
-There are several ways of editing your application.
+## How to Use
 
-**Use Lovable**
+1. **Search**: Enter any English Wikipedia article URL in the search bar
+2. **Read**: Get an AI-generated summary and key insights about the topic
+3. **Chat**: Ask follow-up questions to dive deeper into any aspect
+4. **Save**: Bookmark important responses in your conversation history
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c7f1d055-86c1-46e4-aac9-1d69d8838793) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technologies Used
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Frontend**: React 18, TypeScript, Vite
+- **UI Components**: shadcn/ui, Tailwind CSS
+- **AI Integration**: Anthropic Claude API
+- **Storage**: Local browser storage
+- **Icons**: Lucide React
 
-## How can I deploy this project?
+## Development
 
-Simply open [Lovable](https://lovable.dev/projects/c7f1d055-86c1-46e4-aac9-1d69d8838793) and click on Share -> Publish.
+### Prerequisites
 
-## Can I connect a custom domain to my Lovable project?
+- Node.js (v18 or higher)
+- npm or yarn
 
-Yes, you can!
+### Setup
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```bash
+# Clone the repository
+git clone <YOUR_GIT_URL>
+cd wikibuddy
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+# Install dependencies
+npm install
+
+# Install server dependencies
+cd server && npm install && cd ..
+
+# Start both frontend and backend
+npm start
+```
+
+### Development Commands
+
+```bash
+# Start both frontend and backend together
+npm start
+# or
+npm run dev:full
+
+# Start only the frontend (client)
+npm run dev
+# or
+npm run dev:client
+
+# Start only the backend (server)
+npm run dev:server
+```
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── ui/             # Reusable UI components
+│   ├── ChatContainer.tsx
+│   ├── SearchInterface.tsx
+│   └── ...
+├── lib/                # Utility libraries
+│   ├── ai.ts          # AI service integration
+│   ├── storage.ts     # Local storage management
+│   └── wikipedia.ts   # Wikipedia API integration
+├── hooks/              # Custom React hooks
+└── pages/              # Page components
+```
+
+## Privacy
+
+WikiBuddy respects your privacy:
+
+- No account registration required
+- All data stored locally in your browser
+- No personal information collected
+- AI processing handled by Anthropic's Claude API
+
+## Support
+
+For questions or support, please contact: contact@sasothecreator.com
+
+## License
+
+This project is for educational and personal use.

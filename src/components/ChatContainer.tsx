@@ -57,12 +57,12 @@ export const ChatContainer = ({
     onSendMessage();
   };
 
-  // Si pas d'article, ne rien afficher
+  // If no article, don't display anything
   if (!currentArticle) {
     return null;
   }
 
-  // Si article chargé mais pas encore de conversation, afficher juste l'input
+  // If article loaded but no conversation started yet, display just the input
   if (!hasStartedConversation) {
     return (
       <div className="w-full h-full flex flex-col bg-background border rounded-lg shadow-sm">
@@ -111,7 +111,7 @@ export const ChatContainer = ({
     );
   }
 
-  // Conversation en cours, afficher l'interface complète
+  // Conversation in progress, display the complete interface
   return (
     <div className="w-full h-full flex flex-col bg-background border rounded-lg shadow-sm">
       <ChatHeader

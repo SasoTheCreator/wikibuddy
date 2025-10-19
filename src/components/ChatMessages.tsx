@@ -54,11 +54,26 @@ export const ChatMessages = ({
   };
 
   const formatMessageContent = (content: string) => {
-    // Convert ***text*** to bold
+    // Convert ### title to bold (h3)
     let formatted = content.replace(
-      /\*\*\*(.*?)\*\*\*/g,
-      "<strong>$1</strong>"
+      /^### (.*$)/gm,
+      "<h3 class='font-bold text-lg mb-2 mt-3'>$1</h3>"
     );
+
+    // Convert ## title to bold (h2)
+    formatted = formatted.replace(
+      /^## (.*$)/gm,
+      "<h2 class='font-bold text-xl mb-2 mt-4'>$1</h2>"
+    );
+
+    // Convert # title to bold (h1)
+    formatted = formatted.replace(
+      /^# (.*$)/gm,
+      "<h1 class='font-bold text-2xl mb-3 mt-4'>$1</h1>"
+    );
+
+    // Convert ***text*** to bold
+    formatted = formatted.replace(/\*\*\*(.*?)\*\*\*/g, "<strong>$1</strong>");
 
     // Convert **text** to bold
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
@@ -185,9 +200,22 @@ export const ChatMessages = ({
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() =>
-                          handleSaveBotResponse(message.id, message.content)
-                        }
+                        onClick={() => {
+                          // Find the user question that corresponds to this assistant response
+                          const messageIndex = messages.findIndex(
+                            (m) => m.id === message.id
+                          );
+                          const userQuestion =
+                            messageIndex > 0 &&
+                            messages[messageIndex - 1].role === "user"
+                              ? messages[messageIndex - 1].content
+                              : undefined;
+                          handleSaveBotResponse(
+                            message.id,
+                            message.content,
+                            userQuestion
+                          );
+                        }}
                         className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground"
                         title={
                           savedResponseIds.includes(message.id)

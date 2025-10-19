@@ -390,8 +390,8 @@ export const FooterModals = ({ activeModal, onClose }: FooterModalsProps) => {
             </h4>
             <div className="space-y-3">
               <p className="text-muted-foreground leading-relaxed">
-                <strong>Search:</strong> Enter any Englush Wikipedia article in
-                the search bar to start learing more about the subject.
+                <strong>Search:</strong> Enter any English Wikipedia article in
+                the search bar to start learning more about the subject.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 <strong>Read:</strong> Get an AI-generated summary and key
