@@ -34,12 +34,14 @@ export class AIService {
     this.backendUrl =
       import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
 
-    // Production host override: if running on the Lovable domain, force Railway backend URL
-    // This avoids needing to configure VITE_BACKEND_URL in the frontend hosting platform
+    // Production host override: if running on Vercel, use relative API path
+    // This allows the frontend to call serverless functions on the same domain
     if (typeof window !== "undefined") {
       const host = window.location.host;
-      if (host === "wikibuddy.lovable.app") {
-        this.backendUrl = "https://wikibuddy-production.up.railway.app";
+
+      // For Vercel deployments, use relative API path
+      if (host.includes("vercel.app") || host === "wikibuddy.lovable.app") {
+        this.backendUrl = "";
       }
     }
   }
